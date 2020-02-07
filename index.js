@@ -17,7 +17,8 @@ function displayResults(responseJson) {
         newData.forEach(function(val){
             $('#resultList').append(
                 `<li><h3><a class="links" href="${val.url}">${val.fullName}</a></h3>
-                <p>${val.description}</p>`);
+                <p>${val.description}</p>
+                <img src="${val.images[0].url}">`);
                 if (val.addresses[0].type === "Mailing"){
                 $('#resultList').append(`<h5>${val.addresses[1].line1}<br>${val.addresses[1].city}, ${val.addresses[1].stateCode} ${val.addresses[1].postalCode}</h5>
                </li>`)
@@ -34,7 +35,10 @@ function getParks(query, limit=10) {
     const params = {
       q: query,
       limit: limit,
-      fields: 'addresses'
+      fields: ['addresses', 'images']
+      
+      
+
     };
     const queryString = formatQueryParams(params);
     const newurl = searchURL + '?' + queryString + apiKey;

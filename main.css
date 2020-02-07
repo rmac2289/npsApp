@@ -23,6 +23,10 @@ button h3 {
     padding: 0;
     margin: 5px;
 }
+img {
+    max-height:200px;
+    max-width: 200px;
+}
 button:hover{
     cursor: pointer;
     background: white;
