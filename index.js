@@ -17,9 +17,15 @@ function displayResults(responseJson) {
         newData.forEach(function(val){
             $('#resultList').append(
                 `<li><h3><a class="links" href="${val.url}">${val.fullName}</a></h3>
-                <p>${val.description}</p>
-               </li>`
-          )})
+                <p>${val.description}</p>`);
+                if (val.addresses[0].type === "Mailing"){
+                $('#resultList').append(`<h5>${val.addresses[1].line1}<br>${val.addresses[1].city}, ${val.addresses[1].stateCode} ${val.addresses[1].postalCode}</h5>
+               </li>`)
+                } else {
+                    $('#resultList').append(`<h5>${val.addresses[0].line1}<br>${val.addresses[0].city}, ${val.addresses[0].stateCode} ${val.addresses[0].postalCode}</h5>
+               </li>`)
+                }
+            })
 
         $('#results').removeClass('hidden');
     }
@@ -28,6 +34,7 @@ function getParks(query, limit=10) {
     const params = {
       q: query,
       limit: limit,
+      fields: 'addresses'
     };
     const queryString = formatQueryParams(params);
     const newurl = searchURL + '?' + queryString + apiKey;
