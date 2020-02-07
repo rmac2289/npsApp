@@ -13,7 +13,6 @@ function displayResults(responseJson) {
     console.log(responseJson);
     
     let newData = responseJson.data;
-    console.log(newData.addresses);
     $('#resultList').empty();
         newData.forEach(function(val){
             $('#resultList').append(
