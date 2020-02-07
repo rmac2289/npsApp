@@ -31,14 +31,12 @@ function displayResults(responseJson) {
         $('#results').removeClass('hidden');
     }
     
-function getParks(query, limit=10) {
+function getParks(searchTerm, limit=10) {
     const params = {
-      q: query,
+      stateCode: searchTerm,
       limit: limit,
-      fields: ['addresses', 'images']
+      fields: ['addresses', 'images'],
       
-      
-
     };
     const queryString = formatQueryParams(params);
     const newurl = searchURL + '?' + queryString + apiKey;
@@ -62,7 +60,7 @@ function getParks(query, limit=10) {
     function watchForm() {
         $('form').submit(event => {
             event.preventDefault();
-            const searchTerm = $('.text').val();
+            const searchTerm = $('.text').val().split(',');
             const userMax = $('.maxnumber').val()
             getParks(searchTerm,userMax);
             $('#searchresult').html(`<h3 id="searchTerm">Results for ${searchTerm}:</h3>`)
